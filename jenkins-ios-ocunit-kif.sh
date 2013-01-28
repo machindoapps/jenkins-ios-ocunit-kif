@@ -32,7 +32,7 @@ if [[ -d /tmp/KIF-* ]]; then
     rm /tmp/KIF-* 2>&1
 fi
 
-echo "Building NexusIntegrationTests"
+echo "Building MyAppIntegrationTests"
 xcodebuild -target "MyAppIntegrationTests" -configuration Release -sdk iphonesimulator clean build
 
 OUT_FILE=/tmp/KIF-$$.out
