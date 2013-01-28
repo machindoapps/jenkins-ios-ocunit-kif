@@ -6,10 +6,10 @@ set +e
 set -o verbose
 export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/
 
-cd trunk/Nexus;
+cd path-to/MyApp;
 
 # Build and run unit tests, with nice junit style output for Jenkins reports.
-xcodebuild -target NexusUnitTests \
+xcodebuild -target MyAppUnitTests \
 -sdk iphonesimulator \
 -configuration Debug \
 TEST_AFTER_BUILD=YES \
@@ -33,12 +33,12 @@ if [[ -d /tmp/KIF-* ]]; then
 fi
 
 echo "Building NexusIntegrationTests"
-xcodebuild -target "NexusIntegrationTests" -configuration Release -sdk iphonesimulator clean build
+xcodebuild -target "MyAppIntegrationTests" -configuration Release -sdk iphonesimulator clean build
 
 OUT_FILE=/tmp/KIF-$$.out
 echo "Running KIF Integration Tests"
 
-/usr/local/bin/waxsim -f "iphone" "build/Release-iphonesimulator/NexusIntegrationTests.app" > $OUT_FILE 2>&1
+/usr/local/bin/waxsim -f "iphone" "build/Release-iphonesimulator/MyAppIntegrationTests.app" > $OUT_FILE 2>&1
 cat $OUT_FILE
 
 result=`exec grep -c "TESTING FINISHED: 0 failures" $OUT_FILE`
@@ -47,7 +47,7 @@ result=`exec grep -c "TESTING FINISHED: 0 failures" $OUT_FILE`
 if [ "$result" = '0' ]; then
     echo "KIF Integration Tests Failed"
     # replace this http address with the url of your CI server, to obtain the cli jar
-    curl -OL http://steve:8080/jnlpJars/jenkins-cli.jar
+    curl -OL http://localhost/jnlpJars/jenkins-cli.jar
     java -jar jenkins-cli.jar set-build-result unstable
 fi
 
