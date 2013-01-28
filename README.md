@@ -3,14 +3,14 @@ jenkins-ios-ocunit-kif
 
 Jenkins build script for continuous integration and unit testing of iOS apps.
 
-Uses Xcode cli, OCUnit and KIF integration testing framework.
+Uses Xcodebuild cli, OCUnit and KIF integration testing framework.
 
 Will mark a build as unstable if unit or integration tests fail.
 
 Requirements:
 * Jenkins server running on OSX with Xcode installed (as per standard iOS Jenkins setup).
 * Ability to run iOS simulator from command line (e.g. using WaxSim)
-* ocunit2junit Jenkins plugins for generation of Unit Test reports.
+* ocunit2junit Jenkins plugin for generation of Unit Test reports.
 * Jenkins running as Desktop user
  
 How to use:
